@@ -1,0 +1,11 @@
+.color-box {
+    width: 100px;
+    height: 100px;
+    
+}
+
+.button-color-box {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}

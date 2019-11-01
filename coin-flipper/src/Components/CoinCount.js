@@ -15,16 +15,11 @@ class CoinCount extends Component {
             countHeads: 0,
             countTails: 0,
         };
-        this.handleClick = this.handleClick.bind(this)
-        
+        this.handleClick = this.handleClick.bind(this)  
     }
-
     handleClick(){
         this.headsOrTails();
-
     }    
-
-
     //random heads or tails + add to count 
     headsOrTails(){
         const newCoin = randomChoice(this.props.coins)

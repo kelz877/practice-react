@@ -30,11 +30,18 @@ import './Board.css';
  **/
 
 class Board extends Component {
-
+  static defaultProps = {
+    nrows: 5,
+    ncols: 5,
+    chanceLightStartsOn: 0.2
+  }
   constructor(props) {
     super(props);
-
     // TODO: set initial state
+    this.state = {
+      hasWon: false,
+      board: this.createBoard()
+    }
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
@@ -42,6 +49,13 @@ class Board extends Component {
   createBoard() {
     let board = [];
     // TODO: create array-of-arrays of true/false values
+    for(let y=0; y < this.props.nrows; y++){
+      let row = [];
+      for(let x=0; x < this.props.ncols; x++){
+        row.push(Math.random() < this.props.chanceLightStartsOn)
+      }
+      board.push(row)
+    }
     return board
   }
 
@@ -62,10 +76,14 @@ class Board extends Component {
     }
 
     // TODO: flip this cell and the cells around it
-
+    flipCell(y, x)
+    flipCell(y, x - 1)
+    flipCell(y, x + 1)
+    flipCell(y - 1, x)
+    flipCell(y + 1, x)
     // win when every cell is turned off
     // TODO: determine is the game has been won
-
+    let hasWon = board.every(row => row.every(cell => !cell))
     this.setState({board, hasWon});
   }
 
@@ -73,6 +91,33 @@ class Board extends Component {
   /** Render game board or winning message. */
 
   render() {
+
+    if(this.state.hasWon){
+      return <h1>YOU WON</h1>
+    }
+    let tblBoard = []
+    for(let y=0; y < this.props.nrows; y++){
+      let row =[]
+      for(let x=0; x < this.props.ncols; x++){
+        let coord = `${y}-${x}`
+        row.push(
+          <Cell 
+            isLit={this.state.board[y][x]} 
+            key={coord} 
+            flipCellsAroundMe={() => this.flipCellsAround(coord)} 
+          />)
+      }
+      tblBoard.push(<tr key={y}>{row}</tr>);
+      
+    }
+    return (
+      <div>
+        <h1>Lights Out Game!</h1>
+        <table className="Board">
+          {tblBoard}
+        </table>
+      </div>
+    )
 
     // if the game is won, just show a winning msg & render nothing else
 

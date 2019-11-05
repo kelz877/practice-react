@@ -3,6 +3,7 @@ import uuid from 'uuid'
 
 
 class NewBoxForm extends Component{
+  //internal state in this component that manages the individual inputs
   constructor(props){
     super(props)
     this.state = { width: "", height: "", bkgrdcolor: "" }
@@ -12,10 +13,12 @@ class NewBoxForm extends Component{
 
   handleChange(evt){
     this.setState({
+      //anytime there is a change we look for the name and set the state of the name to the new value in the form
       [evt.target.name]: evt.target.value
     })
   }
 
+  //need to take the data that is in the form and pass it up to the boxlist component. when the form is submitted, we call addBox from th parent and are passing newBox (this.state etc.) from the form state upo to the parent that is managing all the boxes state
   handleSubmit(evt){
     evt.preventDefault();
     const newBox = { ...this.state, id: uuid() }
@@ -32,21 +35,27 @@ class NewBoxForm extends Component{
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input 
+          <label htmlFor="width">Width</label>
+          <input
+            id="width" 
             type="text"
             name="width"
             value={this.state.width}
             onChange={this.handleChange}
             placeholder="Width"
           />
-          <input 
+          <label htmlFor="height">Height</label>
+          <input
+            id="height" 
             type="text"
             name="height"
             value={this.state.height}
             onChange={this.handleChange}
             placeholder="Height"
           />
-          <input 
+          <label htmlFor="bkgrdcolor">Background Color</label>
+          <input
+            id="bkgrdcolor" 
             type="text"
             name="bkgrdcolor"
             value={this.state.bkgrdcolor}

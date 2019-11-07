@@ -21,6 +21,7 @@ class NewBoxForm extends Component{
   //need to take the data that is in the form and pass it up to the boxlist component. when the form is submitted, we call addBox from th parent and are passing newBox (this.state etc.) from the form state upo to the parent that is managing all the boxes state
   handleSubmit(evt){
     evt.preventDefault();
+    //creaet newBox variable which takes the existing height, width and color of box and adds a unique id to it
     const newBox = { ...this.state, id: uuid() }
     this.props.addBox(newBox);
     //refresh state

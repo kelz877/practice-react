@@ -26,6 +26,7 @@ class BoxList extends Component{
     const boxes = this.state.boxes.map(box => (
       <Box 
         key={box.id}
+        id={box.id}
         height={box.height}
         width={box.width}
         bkgrdcolor={box.bkgrdcolor}

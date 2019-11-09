@@ -8,6 +8,7 @@ class ToDoList extends Component{
     this.state = {todos: []}
     this.add = this.add.bind(this)
     this.delete = this.delete.bind(this)
+    this.update = this.update.bind(this)
   }
   add(newItem){
     this.setState({
@@ -19,6 +20,15 @@ class ToDoList extends Component{
       todos: this.state.todos.filter(t => t.id !== id)
     })
   };
+  update(id, updatedToDo){
+    const updatedToDos = this.state.todos.map(todo => {
+      if(todo.id === id){
+        return{ ...todo, newToDo: updatedToDo }
+      }
+      return todo
+    })
+    this.setState({ todos: updatedToDos })
+  }
  
   render(){
     const todos = this.state.todos.map(toDo => (
@@ -26,8 +36,9 @@ class ToDoList extends Component{
         newToDo={toDo.newToDo}
         key={toDo.id}
         id={toDo.id}
-        editItem={() => this.edit(toDo.id)}
+        
         deleteItem={this.delete}
+        updateItem={this.update}
       />
     ))
     console.log(todos)

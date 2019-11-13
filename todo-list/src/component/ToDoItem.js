@@ -37,7 +37,7 @@ class ToDoItem extends Component {
       results = (
         <div>
           <form onSubmit={this.handleUpdate}>
-            <input type="text" value={this.state.newToDo} name="NewToDo" onChange={this.handleChange} />
+            <input type="text" value={this.state.newToDo} name="newToDo" onChange={this.handleChange} />
             <button>Submit</button>
           </form>
         </div>
